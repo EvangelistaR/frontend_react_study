@@ -23,10 +23,18 @@ function App(){
   // 1. Variável com seu valor inicial;
   // 2. Função para atualzar esse valor
 
-  function handleAddProject(){
-    setProjects([...projects, `Novo projeto ${Date.now()}`]);
-    console.log(projects);
+  async function handleAddProject(){
+    const response = await api.post('/projects', {
+      title: `Novo Projeto ${Date.now()}`,
+      owner: "Rafa"
+    });
+
+    const project = response.data;
+
+    setProjects([...projects , project]);
   }
+
+  // TODO: Fazer o update e delete
 
   return (
     <>
